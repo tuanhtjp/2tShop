@@ -37,7 +37,8 @@ public class LoginController {
             Customer cus = customerDAO.findByEmailAndPasswordAndStatus(txtEmail, txtPass, (byte) 0);
             if (cus != null) {
                 mv=showAll();
-                mv.addObject("login", cus.getFullName());
+                session.setAttribute("login", cus.getFullName());
+                mv.addObject("page", "customer.jsp");
                 mv.setViewName("index");
                 return mv;
             } else {
@@ -48,34 +49,36 @@ public class LoginController {
         }
     }
 
-    /*
+    
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@RequestParam String txtEmail, @RequestParam String txtFullName, @RequestParam String txtPass, HttpSession session, Model model) {
     	if (txtFullName.equals("") || txtEmail.equals("") || txtPass.equals("")) {
             mv=new ModelAndView("login-admin");
-            mv.addObject("login", "Xin lỗi, vui lòng nhập thông tin bên dưới");
+            mv.addObject("register", "Xin lỗi, vui lòng nhập thông tin bên dưới để đăng ký");
             return mv;
         } else {
-            Customer temp = customerDAO.findByEmail(txtEmail);
-            if (temp == null) {
-                temp.setFullName(txtFullName);
-                temp.setEmail(txtEmail);
-                temp.setPassword(txtPass);
-                temp.setStatus((byte) 0);
-                customerDAO.create(temp);
+            Customer customer = customerDAO.findByEmail(txtEmail);
+            
+            if (customer == null) {
+            	customer = new Customer();
+            	customer.setFullName(txtFullName);
+            	customer.setEmail(txtEmail);
+            	customer.setPassword(txtPass);
+            	customer.setStatus((byte) 0);
+                customerDAO.save(customer);
                 mv=new ModelAndView("login-admin");
-                mv.addObject("login", "Đăng ký thành công");
+                mv.addObject("register", "Đăng ký thành công");
                 return mv;
             } else {
                 mv=new ModelAndView("login-admin");
-                mv.addObject("login", "Xin lỗi, Email đã tồn tại");
+                mv.addObject("register", "Xin lỗi, Email đã tồn tại");
                 return mv;
             	
             }
 
         }
     }
-      */  
+      
     
     
     

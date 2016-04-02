@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,9 +57,53 @@ public class CustomerController {
         return mv;
     }
     
+    @RequestMapping(value = "/customer/remove", method = RequestMethod.POST)
+    public ModelAndView removeCustomer(@RequestParam("cus") int customerID) {
+        Customer temp = customerDAO.getOne(customerID);
+        customerDAO.delete(temp);
+        mv = showAll();
+        return mv;
+    } 
     
-    
-    
+    /*Edit customer*/
+	@RequestMapping(value = "/customer-edit/{cus}", method = RequestMethod.GET)
+	public ModelAndView redirectToCustomerEdit(Model model, @PathVariable("cus") int customerId) {
+		try {
+			Customer customer = customerDAO.findOne(customerId);
+			mv.addObject("customer", customer);
+			mv.addObject("page", "customer-edit.jsp");
+			mv.setViewName("index");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
+	@RequestMapping(value = "/editcus", method = RequestMethod.POST)
+	public ModelAndView editCustomer(Model model, @PathVariable("cus") int customerId,
+			@ModelAttribute("customer") Customer customer) {
+		try {
+			//customerDAO.save(customer);
+//			mv.addObject("customer", customer);
+			mv = showAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mv;
+	}
+	
+/*	@RequestMapping(value = "/customer-edit/edit/{customerId}", method = RequestMethod.POST)
+	public String editCustomer(Model model, @PathVariable("customerId") int customerId,
+			@ModelAttribute("customer") Customer customer) {
+		try {
+			customerDAO.save(customer);
+			model.addAttribute("customer", customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/customer";
+	}*/
+
     
   //Search function
     public List<Customer> listTemp;

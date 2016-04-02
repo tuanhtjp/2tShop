@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Dashboard - Ace Admin</title>
+		<title>Quản lý Admin</title>
 
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,10 +43,11 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container-fluid">
-					<a href="#" class="brand">
+					<a href="${pageContext.request.contextPath}/" class="brand">
 						<small>
-							<i class="icon-leaf"></i>
-							Ace Admin
+							<span><img style="height: 25px;" src="${pageContext.request.contextPath}/resources/assets/css/img/logoN_icon4.png"></img></span>
+							<span><img style="height: 20px" src="${pageContext.request.contextPath}/resources/assets/css/img/logoN_thetime.png"></img></span>
+							
 						</small>
 					</a><!--/.brand-->
 
@@ -308,7 +309,7 @@
 
 			<div class="sidebar" id="sidebar">
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+					<!-- <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 						<button class="btn btn-small btn-success">
 							<i class="icon-signal"></i>
 						</button>
@@ -324,7 +325,7 @@
 						<button class="btn btn-small btn-danger">
 							<i class="icon-cogs"></i>
 						</button>
-					</div>
+					</div> -->
 
 					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 						<span class="btn btn-success"></span>
@@ -582,7 +583,7 @@
 			</div>
 
 			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
+				<!-- <div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
 						<li>
 							<i class="icon-home home-icon"></i>
@@ -593,7 +594,7 @@
 							</span>
 						</li>
 						<li class="active">Dashboard</li>
-					</ul><!--.breadcrumb-->
+					</ul>.breadcrumb
 
 					<div class="nav-search" id="nav-search">
 						<form class="form-search" />
@@ -602,11 +603,11 @@
 								<i class="icon-search nav-search-icon"></i>
 							</span>
 						</form>
-					</div><!--#nav-search-->
-				</div>
+					</div>#nav-search
+				</div> -->
 
 				<div class="page-content">
-					<div class="page-header position-relative">
+					<!-- <div class="page-header position-relative">
 						<h1>
 							Dashboard
 							<small>
@@ -614,10 +615,10 @@
 								overview &amp; stats
 							</small>
 						</h1>
-					</div><!--/.page-header-->
+					</div> --><!--/.page-header-->
 
 					<div class="row-fluid">
-						<span><jsp:include page="customer.jsp" flush="true"></jsp:include></span>
+						<span><jsp:include page="${page}" flush="true"></jsp:include></span>
 					</div><!--/.row-fluid-->
 				</div><!--/.page-content-->
 

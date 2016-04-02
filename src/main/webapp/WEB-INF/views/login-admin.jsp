@@ -16,7 +16,7 @@
 		<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/font-awesome.min.css" />
-
+		
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
@@ -36,9 +36,33 @@
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/ace-ie.min.css" />
 		<![endif]-->
-
+		
 		<!--inline styles related to this page-->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<script>
+
+function validatePassword(){ 
+ var validator = $("#registerForm").validate({
+  rules: {                   
+	  txtPass :"required",
+   txtconfirmPass:{
+    equalTo: "#txtPass"
+      }  
+     },                             
+     messages: {
+      password :" Enter Password",
+      confirmpassword :" Enter Confirm Password Same as Password"
+     }
+ });
+ //if(validator.form()){
+ // alert('Sucess');
+// }
+}
+
+ </script>
+	
+	</head>
 
 	<body class="login-layout">
 		<div class="main-container container-fluid">
@@ -188,11 +212,11 @@
 													<i class="icon-group blue"></i>
 													New User Registration
 												</h4>
-
+												<h6 style="color: red">${register}</h6>
 												<div class="space-6"></div>
 												<p> Enter your details to begin: </p>
 
-												<form action="register" method="post">
+												<form action="register" method="post" name="registerForm" id="registerForm">
 													<fieldset>
 														<label>
 															<span class="block input-icon input-icon-right">
@@ -217,7 +241,7 @@
 
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="password" class="span12" placeholder="Repeat password" />
+																<input type="password" class="span12" name="txtConfirmPass" placeholder="Repeat password" />
 																<i class="icon-retweet"></i>
 															</span>
 														</label>
