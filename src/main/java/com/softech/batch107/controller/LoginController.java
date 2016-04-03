@@ -22,11 +22,13 @@ public class LoginController {
 	@Autowired
 	CustomerDAO customerDAO;
 	
+	//SHOW LOGIN PAGE
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String showLoginForm() {
         return "login-admin";
     }
 
+	//LOGIN
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView verLogin(@RequestParam String txtEmail, @RequestParam String txtPass, HttpSession session, Model model) {
     	if (txtEmail.equals("") && txtPass.equals("")) {
@@ -49,7 +51,7 @@ public class LoginController {
         }
     }
 
-    
+    //REGISTER (Có thể sử dụng để làm CREATE)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@RequestParam String txtEmail, @RequestParam String txtFullName, @RequestParam String txtPass, HttpSession session, Model model) {
     	if (txtFullName.equals("") || txtEmail.equals("") || txtPass.equals("")) {
@@ -79,12 +81,7 @@ public class LoginController {
         }
     }
       
-    
-    
-    
-    
-    
-  //Lấy ra list Cus
+  	//SHOW ALL
     ModelAndView mv = new ModelAndView();
     public List<Customer> listTemp;
     public ModelAndView showAll() {

@@ -22,21 +22,11 @@ public class CustomerController {
     CustomerDAO customerDAO;
 	ModelAndView mv = new ModelAndView();
 	public List<Customer> lisCus;
-//    @Override
-//    public ModelAndView handleRequest(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-//        ModelAndView mv = new ModelAndView("customer");
-//        List<Customers> lisCus = null;
-//        try {
-//            lisCus = customerDAO.findAll();
-//            mv.addObject("listCus", lisCus);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return mv;
-//    }
-    @RequestMapping(value = "/customer", method = RequestMethod.GET)
+	
+	//GET ALL
+	@RequestMapping(value = "/customer", method = RequestMethod.GET)
     public ModelAndView showAll() {
-        try {
+		try {
             lisCus = customerDAO.findAll();
             mv.addObject("listCus", lisCus);
         } catch (Exception e) {
@@ -44,19 +34,23 @@ public class CustomerController {
         }
         return mv;
     }
-
+	
+	//SEARCH
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public ModelAndView searchEmail(@RequestParam String txtSearch) {
-        if (txtSearch.equals("")) {
+    	if (txtSearch.equals("")) {
             showAll();
         } else {
             mv.clear();
-            mv=search(txtSearch);
-            mv.setViewName("index");
+            search(txtSearch);
+            
         }
+    	mv.addObject("page", "customer.jsp");
+		mv.setViewName("index");
         return mv;
     }
-    
+   
+    //DELETE
     @RequestMapping(value = "/customer/remove", method = RequestMethod.POST)
     public ModelAndView removeCustomer(@RequestParam("cus") int customerID) {
         Customer temp = customerDAO.getOne(customerID);
@@ -65,7 +59,7 @@ public class CustomerController {
         return mv;
     } 
     
-    /*Edit alo customer*/
+    //SHOW PAGE EDIT
 	@RequestMapping(value = "/customer-edit/{cus}", method = RequestMethod.GET)
 	public ModelAndView redirectToCustomerEdit(Model model, @PathVariable("cus") int customerId) {
 		try {
@@ -79,6 +73,7 @@ public class CustomerController {
 		return mv;
 	}
 
+	//EDIT
 	@RequestMapping(value = "/{customerId}", method = RequestMethod.POST)
 	public ModelAndView editCustomer(Model model, @PathVariable("customerId") int customerId,
 			@ModelAttribute("customer") Customer customer) {
@@ -93,21 +88,9 @@ public class CustomerController {
 		return mv;
 	}
 	
-/*	@RequestMapping(value = "/customer-edit/edit/{customerId}", method = RequestMethod.POST)
-	public String editCustomer(Model model, @PathVariable("customerId") int customerId,
-			@ModelAttribute("customer") Customer customer) {
-		try {
-			customerDAO.save(customer);
-			model.addAttribute("customer", customer);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:/customer";
-	}*/
 
     
-  //Search function
-    public List<Customer> listTemp;
+  //SEARCH FUNCTION
     public ModelAndView search(String email) {
         try {
         	Customer temp = customerDAO.findByEmail(email);
