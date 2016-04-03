@@ -23,7 +23,7 @@
 
 <h1>EDIT</h1>
  <form:form
-				action="editcus"
+				action="${pageContext.request.contextPath}/${customer.customerID}"
 				method="post" modelAttribute="customer">
 	<table class="table table-hover">
 			<tr>
@@ -42,10 +42,10 @@
 				<td>Password</td>
 				<td><form:input type="password" path="password" /></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td>DOB</td>
-				<td><form:input type="date" path="dob" /></td>
-			</tr>
+				<td><form:input type="text" path="dob" /></td>
+			</tr> --%>
 			<tr>
 				<td>Sex</td>
 				<td><form:input type="number" path="sex" value="1" /></td>
@@ -70,17 +70,8 @@
 					<td colspan="2"><input class="glyphicon glyphicon-search" type="submit" /></td>
 			</tr>
 				
-
-					
-					
-					
 					
 					<!-- <td><input type="text" required="" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" value="" name="dates_pattern1" id="dates_pattern1" list="dates_pattern1_datalist" /></td> -->
-					
-					
-					
-			
-				
 			
 	</table>
 </form:form> 

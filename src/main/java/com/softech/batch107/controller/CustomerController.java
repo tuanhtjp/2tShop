@@ -79,13 +79,14 @@ public class CustomerController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editcus", method = RequestMethod.POST)
-	public ModelAndView editCustomer(Model model, @PathVariable("cus") int customerId,
+	@RequestMapping(value = "/{customerId}", method = RequestMethod.POST)
+	public ModelAndView editCustomer(Model model, @PathVariable("customerId") int customerId,
 			@ModelAttribute("customer") Customer customer) {
 		try {
-			//customerDAO.save(customer);
-//			mv.addObject("customer", customer);
-			mv = showAll();
+			customerDAO.save(customer);
+			model.addAttribute("customer", customer);
+			mv.addObject("page", "customer.jsp");
+			showAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
