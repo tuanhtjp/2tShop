@@ -19,7 +19,7 @@ public class AuctionController {
 	ModelAndView mv = new ModelAndView();
 	public List<Auction> listAuction;
 	
-	//findAll Auction 1
+	//findAll Auction 1 2 khanh thu commit
 	@RequestMapping(value = "/auction", method = RequestMethod.GET)
 	public ModelAndView showAll(){
 		try {
