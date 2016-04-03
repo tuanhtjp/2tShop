@@ -22,7 +22,7 @@ public class LoginController {
 	@Autowired
 	CustomerDAO customerDAO;
 	
-	//SHOW LOGIN PAGE
+	//SHOW LOGIN PAGE 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String showLoginForm() {
         return "login-admin";

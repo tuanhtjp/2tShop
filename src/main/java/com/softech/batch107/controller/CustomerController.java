@@ -59,7 +59,7 @@ public class CustomerController {
         return mv;
     } 
     
-    //SHOW PAGE EDIT
+    //SHOW EDIT PAGE
 	@RequestMapping(value = "/customer-edit/{cus}", method = RequestMethod.GET)
 	public ModelAndView redirectToCustomerEdit(Model model, @PathVariable("cus") int customerId) {
 		try {

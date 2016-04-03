@@ -22,7 +22,7 @@ import com.softech.batch107.dao.CustomerDAO;
 @Controller
 public class HomeController {
 
-//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(HomeController.class); 
 
 	/*@Controller ~ sinh ra 1 bean bên dispathcer.xml;
 	@Autowired ~ HomeConoller2 homeController = docxml().getbean('homeController');
