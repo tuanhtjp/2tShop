@@ -2,7 +2,7 @@ package com.softech.batch107.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
+/*import java.util.Date;*/
 import java.util.List;
 
 
@@ -23,8 +23,8 @@ public class Customer implements Serializable {
 	@Lob
 	private String address;
 
-	@Temporal(TemporalType.DATE)
-	private Date dob;
+	@Lob
+	private String dob;
 
 	@Lob
 	private String email;
@@ -40,7 +40,7 @@ public class Customer implements Serializable {
 
 	private String phone;
 
-	private byte sex;
+	private String sex;
 
 	private byte status;
 
@@ -79,11 +79,11 @@ public class Customer implements Serializable {
 		this.address = address;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return this.dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
@@ -127,11 +127,11 @@ public class Customer implements Serializable {
 		this.phone = phone;
 	}
 
-	public byte getSex() {
+	public String getSex() {
 		return this.sex;
 	}
 
-	public void setSex(byte sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 

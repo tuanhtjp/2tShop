@@ -16,7 +16,7 @@
 
 </head>
 <body>
-
+	
 	<div class="container">
 		<form class="form-inline" role="form" action="customer" method="post">
 			<div class="form-group">
@@ -25,14 +25,18 @@
 					placeholder="Enter email" style="height: 34px">
 			</div>
 			<button type="submit" class="btn btn-default">Search</button>
+			
 		</form>
+		
 	</div>
-
+<form action="cus-create" method="GET">
+							<button type="submit" value="Create New" class="btn btn-primary">Create</button>
+						</form>
 
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>CustomerID</th>
+				<th>ID</th>
 				<th>Full Name</th>
 				<th>Email</th>
 				<th>Password</th>
@@ -54,19 +58,31 @@
 					<td><c:out value="${cus.getEmail()}"></c:out></td>
 					<td><c:out value="${cus.getPassword()}"></c:out></td>
 					<td><c:out value="${cus.getDob()}"></c:out></td>
-					<td><c:out value="${cus.getSex()}"></c:out></td>
+					<td>
+						<c:choose> 
+							<%-- <c:out value="${cus.getSex() }"></c:out> --%>
+							<c:when test="${cus.getSex() == '1' }"><p>Male</p></c:when>
+							<c:when test="${cus.getSex() == '0' }"><p>Female</p></c:when>
+						</c:choose>	
+					</td>
 					<td><c:out value="${cus.getPhone()}"></c:out></td>
 					<td><c:out value="${cus.getAddress()}"></c:out></td>
 					<td><c:out value="${cus.getImage()}"></c:out></td>
-					<td><c:out value="${cus.getStatus()}"></c:out></td>
 					<td>
-						<form action="customer-edit/${cus.getCustomerID()}" method="GET">
+						<c:choose> 
+							<%-- <c:out value="${cus.getSex() }"></c:out> --%>
+							<c:when test="${cus.getStatus() == 1 }"><p style="color: red; font-weight: bold;">Off</p></c:when>
+							<c:when test="${cus.getStatus() == 0 }"><p style="color: green; font-weight: bold;">On</p></c:when>
+						</c:choose>	
+					</td>
+					<td>
+						<form action="cus-edit/${cus.getCustomerID()}" method="GET">
 							<input id="cus" name="cus" type="hidden"
 								value="${cus.getCustomerID()}" /> 
 							<button type="submit" value="edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
 						</form>
 						</td>
-					<td><c:url var="deleteUrl" value="/customer/remove" />
+					<td><c:url var="deleteUrl" value="customer/remove" />
 						<form action="${deleteUrl}" method="POST">
 							<input id="cus" name="cus" type="hidden"
 								value="${cus.getCustomerID()}" /> 

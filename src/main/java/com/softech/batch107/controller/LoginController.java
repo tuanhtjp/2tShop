@@ -22,8 +22,8 @@ public class LoginController {
 	@Autowired
 	CustomerDAO customerDAO;
 	
-	//SHOW LOGIN PAGE 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	//SHOW LOGIN ADMIN PAGE 
+	@RequestMapping(value = "/loginAdmin", method = RequestMethod.GET)
     public String showLoginForm() {
         return "login-admin";
     }
@@ -40,8 +40,7 @@ public class LoginController {
             if (cus != null) {
                 mv=showAll();
                 session.setAttribute("login", cus.getFullName());
-                mv.addObject("page", "customer.jsp");
-                mv.setViewName("index");
+                mv.setViewName("redirect:/customer");
                 return mv;
             } else {
                 mv=new ModelAndView("login-admin");
@@ -93,5 +92,33 @@ public class LoginController {
             e.printStackTrace();
         }
         return mv;
+    }
+    
+  //SHOW LOGIN CLIENT PAGE 
+  	@RequestMapping(value = "/loginClient", method = RequestMethod.GET)
+      public String showLoginClient() {
+          return "login";
+      }
+  	
+  //LOGIN CLIENT
+    @RequestMapping(value = "/loginClient", method = RequestMethod.POST)
+    public ModelAndView verLoginCustomer(@RequestParam String txtEmail, @RequestParam String txtPass, HttpSession session, Model model) {
+    	if (txtEmail.equals("") && txtPass.equals("")) {
+            mv=new ModelAndView("login");
+           mv.addObject("login", "Xin lỗi, vui lòng nhập tên đăng nhập và mật khẩu");
+            return mv;
+        } else {
+            Customer cus = customerDAO.findByEmailAndPasswordAndStatus(txtEmail, txtPass, (byte) 0);
+            if (cus != null) {
+                mv=showAll();
+                session.setAttribute("login", cus.getFullName());
+                mv.setViewName("redirect:/");
+                return mv;
+            } else {
+                mv=new ModelAndView("login");
+              mv.addObject("login", "Xin lỗi, tên đăng nhập hoặc mật khẩu không đúng");
+                return mv;
+            }
+        }
     }
 }

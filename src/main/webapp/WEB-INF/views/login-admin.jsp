@@ -97,14 +97,14 @@ function validatePassword(){
 													<fieldset>
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="email" name="txtEmail" class="span12" placeholder="Email" />
+																<input type="email" name="txtEmail" class="span12" placeholder="Email" required="required" />
 																<i class="icon-user"></i>
 															</span>
 														</label>
 
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="password" name="txtPass" class="span12" placeholder="Password" />
+																<input type="password" name="txtPass" class="span12" placeholder="Password" required="required"/>
 																<i class="icon-lock"></i>
 															</span>
 														</label>
@@ -220,34 +220,34 @@ function validatePassword(){
 													<fieldset>
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="email" class="span12" name="txtEmail" placeholder="Email" />
+																<input type="email" class="span12" name="txtEmail" placeholder="Email" required="required"/>
 																<i class="icon-envelope"></i>
 															</span>
 														</label>
 
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="text" class="span12" name="txtFullName" placeholder="Full Name" />
+																<input type="text" class="span12" name="txtFullName" placeholder="Full Name" required="required"/>
 																<i class="icon-user"></i>
 															</span>
 														</label>
 
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="password" class="span12" name="txtPass" placeholder="Password" />
+																<input type="password" class="span12" name="txtPass" placeholder="Password" required="required"/>
 																<i class="icon-lock"></i>
 															</span>
 														</label>
 
 														<label>
 															<span class="block input-icon input-icon-right">
-																<input type="password" class="span12" name="txtConfirmPass" placeholder="Repeat password" />
+																<input type="password" class="span12" name="txtConfirmPass" placeholder="Repeat password" required="required" />
 																<i class="icon-retweet"></i>
 															</span>
 														</label>
 
 														<label>
-															<input type="checkbox" />
+															<input type="checkbox" required="required"/>
 															<span class="lbl">
 																I accept the
 																<a href="#">User Agreement</a>

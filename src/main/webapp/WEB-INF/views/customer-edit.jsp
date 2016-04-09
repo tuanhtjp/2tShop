@@ -23,12 +23,12 @@
 
 <h1>EDIT</h1>
  <form:form
-				action="${pageContext.request.contextPath}/${customer.customerID}"
+				action="${pageContext.request.contextPath}/cus-edit/${customer.customerID}"
 				method="post" modelAttribute="customer">
 	<table class="table table-hover">
 			<tr>
 				<td>CustomerID</td>
-				<td><form:input type="text" path="customerID" /></td>
+				<td><form:input type="text" path="customerID" readonly="true" /></td>
 			</tr>
 			<tr>
 				<td>Full Name</td>
@@ -42,13 +42,18 @@
 				<td>Password</td>
 				<td><form:input type="password" path="password" /></td>
 			</tr>
-			<%-- <tr>
+			 <tr>
 				<td>DOB</td>
-				<td><form:input type="text" path="dob" /></td>
-			</tr> --%>
+				<td><form:input type="date" path="dob" /></td>
+			</tr>
 			<tr>
 				<td>Sex</td>
-				<td><form:input type="number" path="sex" value="1" /></td>
+				<td>
+					<form:select path="sex" title="- Select Sex -">
+						<form:option value="1">Male</form:option>
+						<form:option value="0">Female</form:option>
+					</form:select>
+				</td>
 			</tr>
 			<tr>
 				<td>Phone</td>
@@ -64,15 +69,16 @@
 			</tr>
 			<tr>
 				<td>Status</td>
-				<td><form:input type="number" path="status" /></td>
+				<td>
+					<form:select path="status">
+						<form:option value="0">On</form:option>
+						<form:option value="1">Off</form:option>
+					</form:select>
+				</td>
 			</tr>
 			<tr>
-					<td colspan="2"><input class="glyphicon glyphicon-search" type="submit" /></td>
+					<td colspan="2"><input class="btn btn-danger" type="submit" /></td>
 			</tr>
-				
-					
-					<!-- <td><input type="text" required="" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" value="" name="dates_pattern1" id="dates_pattern1" list="dates_pattern1_datalist" /></td> -->
-			
 	</table>
 </form:form> 
 </body>

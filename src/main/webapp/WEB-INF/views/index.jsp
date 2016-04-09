@@ -340,9 +340,9 @@
 
 				<ul class="nav nav-list">
 					<li class="active">
-						<a href="index.html">
+						<a href="${pageContext.request.contextPath}/employee">
 							<i class="icon-dashboard"></i>
-							<span class="menu-text"> Dashboard </span>
+							<span class="menu-text"> Employee </span>
 						</a>
 					</li>
 
