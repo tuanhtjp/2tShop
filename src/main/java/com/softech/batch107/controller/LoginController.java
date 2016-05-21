@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.softech.batch107.dao.CustomerDAO;
+import com.softech.batch107.dao.EmployeeDAO;
 import com.softech.batch107.model.Customer;
+import com.softech.batch107.model.Employee;;
 
 @Controller
 public class LoginController {
 
 	@Autowired
 	CustomerDAO customerDAO;
+	@Autowired
+	EmployeeDAO employeeDAO;
+	
 	
 	//SHOW LOGIN ADMIN PAGE 
 	@RequestMapping(value = "/loginAdmin", method = RequestMethod.GET)
@@ -36,10 +41,11 @@ public class LoginController {
             mv.addObject("login", "Xin lỗi, vui lòng nhập tên đăng nhập và mật khẩu");
             return mv;
         } else {
-            Customer cus = customerDAO.findByEmailAndPasswordAndStatus(txtEmail, txtPass, (byte) 0);
-            if (cus != null) {
+            Employee emp = employeeDAO.findByEmailAndPasswordAndStatus(txtEmail, txtPass, (byte) 0);
+            if (emp != null) {
                 mv=showAll();
-                session.setAttribute("login", cus.getFullName());
+                session.setAttribute("login", emp.getFullName());
+                session.setAttribute("employeeID", emp.getEmployeeID());
                 mv.setViewName("redirect:/customer");
                 return mv;
             } else {
@@ -112,6 +118,7 @@ public class LoginController {
             if (cus != null) {
                 mv=showAll();
                 session.setAttribute("login", cus.getFullName());
+                session.setAttribute("customerID", cus.getCustomerID());
                 mv.setViewName("redirect:/");
                 return mv;
             } else {

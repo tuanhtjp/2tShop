@@ -11,21 +11,21 @@ import javax.persistence.*;
 public class OrderdetailPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
-	@Column(insertable=false, updatable=false)
 	private int orderID;
-
-	@Column(insertable=false, updatable=false)
 	private int productID;
 
 	public OrderdetailPK() {
 	}
+
+	@Column(insertable=false, updatable=false)
 	public int getOrderID() {
 		return this.orderID;
 	}
 	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
+
+	@Column(insertable=false, updatable=false)
 	public int getProductID() {
 		return this.productID;
 	}

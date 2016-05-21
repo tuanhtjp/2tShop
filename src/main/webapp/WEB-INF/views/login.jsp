@@ -127,9 +127,9 @@
                     <li class="item even"> <a class="product-image" href="http://htmldemo.magikcommerce.com/ecommerce/eclipse-html-template/login.html#" title="Downloadable Product "><img alt="Downloadable Product " src="./Eclipse, premium HTML5 &amp; CSS3 template_files/p3.jpg" width="80"></a>
                       <div class="detail-item">
                         <div class="product-details"> <a href="http://htmldemo.magikcommerce.com/ecommerce/eclipse-html-template/login.html#" title="Remove This Item" onclick="" class="glyphicon glyphicon-remove">&nbsp;</a> <a class="glyphicon glyphicon-pencil" title="Edit item" href="http://htmldemo.magikcommerce.com/ecommerce/eclipse-html-template/login.html#">&nbsp;</a>
-                          <p class="product-name"> <a href="http://htmldemo.magikcommerce.com/ecommerce/eclipse-html-template/login.html#" title="Downloadable Product">Downloadable Product </a> </p>
+                          <p class="product-name"> <a href="http://htmldemo.magikcommerce.com/ecommerce/eclipse-html-template/login.html#" title="Downloadable Product">Name: ${it.product.productName} </a> </p>
                         </div>
-                        <div class="product-details-bottom"> <span class="price">$100.00</span> <span class="title-desc">Qty:</span> <strong>1</strong> </div>
+                        <div class="product-details-bottom"> Price: <span style="color: red;">${it.product.price} <span class="title-desc">Quantity:</span> <strong> ${it.quantity}</strong> </div>
                       </div>
                     </li>
                     <li class="item last odd"> <a class="product-image" href="http://htmldemo.magikcommerce.com/ecommerce/eclipse-html-template/login.html#" title="  Sample Product "><img alt="  Sample Product " src="./Eclipse, premium HTML5 &amp; CSS3 template_files/p2.jpg" width="80"></a>
@@ -579,7 +579,7 @@ $(window).scroll(function() {
             <div class="content">
               <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
               <div class="buttons-set">
-                <button onclick="window.location=&#39;http://demo.magentomagik.com/computerstore/customer/account/create/&#39;;" class="button create-account" type="button"><span>Create an Account</span></button>
+                <button class="button create-account" type="button"><span><a href="${pageContext.request.contextPath}/customer/cus-create">Create an Account</a></span></button>
               </div>
             </div>
           </div>
@@ -587,7 +587,7 @@ $(window).scroll(function() {
             <div class="content">
               <p>If you have an account with us, please log in.</p>
               <h5 style="color: red">${login }</h5>
-              <form action="loginClient" method="POST">
+              <form action="${pageContext.request.contextPath }/loginClient" method="POST">
               <ul class="form-list">
                 <li>
                   <label for="email">Email Address <span class="required">*</span></label>

@@ -10,26 +10,20 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="categoryauction")
 @NamedQuery(name="Categoryauction.findAll", query="SELECT c FROM Categoryauction c")
 public class Categoryauction implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int categoryAuctionID;
-
 	private String categoryName;
-
 	private byte status;
-
-	//bi-directional many-to-one association to Auction
-	@OneToMany(mappedBy="categoryauction", fetch=FetchType.EAGER)
 	private List<Auction> auctions;
 
 	public Categoryauction() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getCategoryAuctionID() {
 		return this.categoryAuctionID;
 	}
@@ -37,6 +31,7 @@ public class Categoryauction implements Serializable {
 	public void setCategoryAuctionID(int categoryAuctionID) {
 		this.categoryAuctionID = categoryAuctionID;
 	}
+
 
 	public String getCategoryName() {
 		return this.categoryName;
@@ -46,6 +41,7 @@ public class Categoryauction implements Serializable {
 		this.categoryName = categoryName;
 	}
 
+
 	public byte getStatus() {
 		return this.status;
 	}
@@ -54,6 +50,9 @@ public class Categoryauction implements Serializable {
 		this.status = status;
 	}
 
+
+	//bi-directional many-to-one association to Auction
+	@OneToMany(mappedBy="categoryauction")
 	public List<Auction> getAuctions() {
 		return this.auctions;
 	}

@@ -3,6 +3,7 @@ package com.softech.batch107.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -10,29 +11,21 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Table(name="shipped")
 @NamedQuery(name="Shipped.findAll", query="SELECT s FROM Shipped s")
 public class Shipped implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int shipID;
-
 	private String shipMethod;
-
 	private byte status;
-
 	private BigDecimal transportFee;
-
-	//bi-directional one-to-one association to Order
-	@OneToOne
-	@JoinColumn(name="ShipID")
-	private Order order;
+	private List<Order> orders;
 
 	public Shipped() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getShipID() {
 		return this.shipID;
 	}
@@ -40,6 +33,7 @@ public class Shipped implements Serializable {
 	public void setShipID(int shipID) {
 		this.shipID = shipID;
 	}
+
 
 	public String getShipMethod() {
 		return this.shipMethod;
@@ -49,6 +43,7 @@ public class Shipped implements Serializable {
 		this.shipMethod = shipMethod;
 	}
 
+
 	public byte getStatus() {
 		return this.status;
 	}
@@ -56,6 +51,7 @@ public class Shipped implements Serializable {
 	public void setStatus(byte status) {
 		this.status = status;
 	}
+
 
 	public BigDecimal getTransportFee() {
 		return this.transportFee;
@@ -65,12 +61,29 @@ public class Shipped implements Serializable {
 		this.transportFee = transportFee;
 	}
 
-	public Order getOrder() {
-		return this.order;
+
+	//bi-directional many-to-one association to Order
+	@OneToMany(mappedBy="shipped")
+	public List<Order> getOrders() {
+		return this.orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Order addOrder(Order order) {
+		getOrders().add(order);
+		order.setShipped(this);
+
+		return order;
+	}
+
+	public Order removeOrder(Order order) {
+		getOrders().remove(order);
+		order.setShipped(null);
+
+		return order;
 	}
 
 }

@@ -13,21 +13,16 @@ import javax.persistence.*;
 @NamedQuery(name="Payment.findAll", query="SELECT p FROM Payment p")
 public class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int paymentID;
-
 	private String paymentMethod;
-
-	//bi-directional one-to-one association to Order
-	@OneToOne
-	@JoinColumn(name="PaymentID")
 	private Order order;
 
 	public Payment() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getPaymentID() {
 		return this.paymentID;
 	}
@@ -35,6 +30,7 @@ public class Payment implements Serializable {
 	public void setPaymentID(int paymentID) {
 		this.paymentID = paymentID;
 	}
+
 
 	public String getPaymentMethod() {
 		return this.paymentMethod;
@@ -44,6 +40,10 @@ public class Payment implements Serializable {
 		this.paymentMethod = paymentMethod;
 	}
 
+
+	//bi-directional one-to-one association to Order
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="PaymentID")
 	public Order getOrder() {
 		return this.order;
 	}

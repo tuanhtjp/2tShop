@@ -16,59 +16,24 @@ import java.util.List;
 @NamedQuery(name="Order.findAll", query="SELECT o FROM Order o")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderID;
-
-	private BigDecimal freight;
-
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderDate;
-
 	private int paymentID;
-
 	private String shipAddress;
-
-	private int shipID;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date shippedDate;
-
 	private byte status;
-
-	private BigDecimal total;
-
-	//bi-directional many-to-one association to Orderdetail
-	@OneToMany(mappedBy="order", fetch=FetchType.EAGER)
-	private List<Orderdetail> orderdetails;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CustomerID")
-	private Customer customer;
-
-	//bi-directional many-to-one association to Employee
-	@ManyToOne
-	@JoinColumn(name="EmployeeID")
-	private Employee employee;
-
-	//bi-directional many-to-one association to Promotion
-	@ManyToOne
-	@JoinColumn(name="PromotionID")
-	private Promotion promotion;
-
-	//bi-directional one-to-one association to Payment
-	@OneToOne(mappedBy="order")
-	private Payment payment;
-
-	//bi-directional one-to-one association to Shipped
-	@OneToOne(mappedBy="order")
 	private Shipped shipped;
+	private String phone;
+	private Payment payment;
+	private List<Orderdetail> orderdetails;
+	private Customer customer;
+	private Employee employee;
+	private Promotion promotion;
 
 	public Order() {
 	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getOrderID() {
 		return this.orderID;
 	}
@@ -77,14 +42,7 @@ public class Order implements Serializable {
 		this.orderID = orderID;
 	}
 
-	public BigDecimal getFreight() {
-		return this.freight;
-	}
-
-	public void setFreight(BigDecimal freight) {
-		this.freight = freight;
-	}
-
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getOrderDate() {
 		return this.orderDate;
 	}
@@ -93,12 +51,21 @@ public class Order implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public int getPaymentID() {
+
+	/*public int getPaymentID() {
 		return this.paymentID;
 	}
 
 	public void setPaymentID(int paymentID) {
 		this.paymentID = paymentID;
+	}*/
+
+	public String getPhone() {
+		return this.phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getShipAddress() {
@@ -109,22 +76,6 @@ public class Order implements Serializable {
 		this.shipAddress = shipAddress;
 	}
 
-	public int getShipID() {
-		return this.shipID;
-	}
-
-	public void setShipID(int shipID) {
-		this.shipID = shipID;
-	}
-
-	public Date getShippedDate() {
-		return this.shippedDate;
-	}
-
-	public void setShippedDate(Date shippedDate) {
-		this.shippedDate = shippedDate;
-	}
-
 	public byte getStatus() {
 		return this.status;
 	}
@@ -133,14 +84,33 @@ public class Order implements Serializable {
 		this.status = status;
 	}
 
-	public BigDecimal getTotal() {
-		return this.total;
+
+	//bi-directional many-to-one association to Shipped
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="ShipID")
+	public Shipped getShipped() {
+		return this.shipped;
 	}
 
-	public void setTotal(BigDecimal total) {
-		this.total = total;
+	public void setShipped(Shipped shipped) {
+		this.shipped = shipped;
 	}
 
+
+	//bi-directional one-to-one association to Payment
+	@OneToOne(/*mappedBy="order",*/ fetch=FetchType.EAGER)
+	@JoinColumn(name="PaymentID")
+	public Payment getPayment() {
+		return this.payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+
+	//bi-directional many-to-one association to Orderdetail
+	@OneToMany(mappedBy="order", cascade = CascadeType.ALL)
 	public List<Orderdetail> getOrderdetails() {
 		return this.orderdetails;
 	}
@@ -163,6 +133,10 @@ public class Order implements Serializable {
 		return orderdetail;
 	}
 
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="CustomerID")
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -171,6 +145,10 @@ public class Order implements Serializable {
 		this.customer = customer;
 	}
 
+
+	//bi-directional many-to-one association to Employee
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="EmployeeID")
 	public Employee getEmployee() {
 		return this.employee;
 	}
@@ -179,28 +157,16 @@ public class Order implements Serializable {
 		this.employee = employee;
 	}
 
+
+	//bi-directional many-to-one association to Promotion
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="PromotionID")
 	public Promotion getPromotion() {
 		return this.promotion;
 	}
 
 	public void setPromotion(Promotion promotion) {
 		this.promotion = promotion;
-	}
-
-	public Payment getPayment() {
-		return this.payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
-	public Shipped getShipped() {
-		return this.shipped;
-	}
-
-	public void setShipped(Shipped shipped) {
-		this.shipped = shipped;
 	}
 
 }

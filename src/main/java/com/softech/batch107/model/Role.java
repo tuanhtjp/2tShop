@@ -14,22 +14,17 @@ import java.util.List;
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int roleID;
-
 	private String description;
-
 	private String roleName;
-
-	//bi-directional many-to-one association to Employee
-	@OneToMany(mappedBy="role", fetch=FetchType.EAGER)
 	private List<Employee> employees;
 
 	public Role() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getRoleID() {
 		return this.roleID;
 	}
@@ -37,6 +32,7 @@ public class Role implements Serializable {
 	public void setRoleID(int roleID) {
 		this.roleID = roleID;
 	}
+
 
 	public String getDescription() {
 		return this.description;
@@ -46,6 +42,7 @@ public class Role implements Serializable {
 		this.description = description;
 	}
 
+
 	public String getRoleName() {
 		return this.roleName;
 	}
@@ -54,6 +51,9 @@ public class Role implements Serializable {
 		this.roleName = roleName;
 	}
 
+
+	//bi-directional many-to-one association to Employee
+	@OneToMany(mappedBy="role")
 	public List<Employee> getEmployees() {
 		return this.employees;
 	}

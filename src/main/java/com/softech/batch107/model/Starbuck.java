@@ -10,33 +10,21 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="starbuck")
 @NamedQuery(name="Starbuck.findAll", query="SELECT s FROM Starbuck s")
 public class Starbuck implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int starID;
-
-	@Temporal(TemporalType.DATE)
 	private Date day;
-
 	private String score;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CustomerID")
 	private Customer customer;
-
-	//bi-directional many-to-one association to Product
-	@ManyToOne
-	@JoinColumn(name="ProductID")
 	private Product product;
 
 	public Starbuck() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getStarID() {
 		return this.starID;
 	}
@@ -45,6 +33,8 @@ public class Starbuck implements Serializable {
 		this.starID = starID;
 	}
 
+
+	@Temporal(TemporalType.DATE)
 	public Date getDay() {
 		return this.day;
 	}
@@ -52,6 +42,7 @@ public class Starbuck implements Serializable {
 	public void setDay(Date day) {
 		this.day = day;
 	}
+
 
 	public String getScore() {
 		return this.score;
@@ -61,6 +52,10 @@ public class Starbuck implements Serializable {
 		this.score = score;
 	}
 
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CustomerID")
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -69,6 +64,10 @@ public class Starbuck implements Serializable {
 		this.customer = customer;
 	}
 
+
+	//bi-directional many-to-one association to Product
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ProductID")
 	public Product getProduct() {
 		return this.product;
 	}

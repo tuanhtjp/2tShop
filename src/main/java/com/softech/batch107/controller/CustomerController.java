@@ -1,6 +1,7 @@
 package com.softech.batch107.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +20,14 @@ import com.softech.batch107.dao.CustomerDAO;
 import com.softech.batch107.model.Customer;
 
 @Controller
+@RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
     CustomerDAO customerDAO;
 	ModelAndView mv = new ModelAndView();
 	public List<Customer> lisCus;
+	
 	
 	//GET ALL
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
@@ -98,7 +101,7 @@ public class CustomerController {
 		public ModelAndView redirectToCustomerCreate() {
 			try {
 				mv.addObject("page", "customer-create.jsp");
-				mv.setViewName("index");
+				mv.setViewName("home");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -107,7 +110,7 @@ public class CustomerController {
 
 		//CREATE
 		@RequestMapping(value = "/cus-create/new", method = RequestMethod.POST)
-		public ModelAndView createCustomer(@RequestParam String fullName, @RequestParam String email, @RequestParam String password, @RequestParam String dob,@RequestParam String sex,@RequestParam String phone,@RequestParam String address, @RequestParam String image,@RequestParam String status,HttpSession session, Model model) {
+		public ModelAndView createCustomer(@RequestParam String fullName, @RequestParam String email, @RequestParam String password, @RequestParam Date dob,@RequestParam byte sex,@RequestParam String phone,@RequestParam String address, @RequestParam String image,@RequestParam String status,HttpSession session, Model model) {
 	            Customer customer = customerDAO.findByEmail(email);
 	            if (customer == null) {
 	            	customer = new Customer();
@@ -121,14 +124,16 @@ public class CustomerController {
 	            	customer.setImage(image);
 	            	customer.setStatus(Byte.parseByte(status));
 	                customerDAO.save(customer);
-	    			showAll();
-	    			mv.setViewName("redirect:/customer");
+	    			//showAll();
+	    			
 	            } else {
 	            	/*mv.addObject("page","customer-create.jsp");*/
 	                model.addAttribute("create", "Email da ton tai");
 	                mv.setViewName("redirect:/cus-create");
 	            }	
-	            return mv;
+	            mv=new ModelAndView("login");
+	            mv.addObject("page", "login.jsp");
+	             return mv;
 	        }
 		
 	
