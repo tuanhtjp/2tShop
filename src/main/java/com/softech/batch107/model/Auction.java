@@ -16,51 +16,25 @@ import java.util.List;
 @NamedQuery(name="Auction.findAll", query="SELECT a FROM Auction a")
 public class Auction implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int auctionID;
-
-	@Lob
 	private String description;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date endTime;
-
-	@Lob
-	private String imageURL;
-
-	private String productName;
-
-	private BigDecimal startPrice;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date startTime;
-
-	private byte status;
-
-	//bi-directional many-to-one association to Categoryauction
-	@ManyToOne
-	@JoinColumn(name="CategoryAuctionID")
-	private Categoryauction categoryauction;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CustomerID")
-	private Customer customer;
-
-	//bi-directional many-to-one association to Employee
-	@ManyToOne
-	@JoinColumn(name="EmployeeID")
 	private Employee employee;
-
-	//bi-directional many-to-one association to Auctionstatus
-	@OneToMany(mappedBy="auction", fetch=FetchType.EAGER)
+	private Date endTime;
+	private String imageURL;
+	private String productName;
+	private BigDecimal startPrice;
+	private Date startTime;
+	private byte status;
+	private Categoryauction categoryauction;
+	private Customer customer;
 	private List<Auctionstatus> auctionstatuses;
 
 	public Auction() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getAuctionID() {
 		return this.auctionID;
 	}
@@ -69,6 +43,8 @@ public class Auction implements Serializable {
 		this.auctionID = auctionID;
 	}
 
+
+	@Lob
 	public String getDescription() {
 		return this.description;
 	}
@@ -77,69 +53,6 @@ public class Auction implements Serializable {
 		this.description = description;
 	}
 
-	public Date getEndTime() {
-		return this.endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getImageURL() {
-		return this.imageURL;
-	}
-
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
-	}
-
-	public String getProductName() {
-		return this.productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public BigDecimal getStartPrice() {
-		return this.startPrice;
-	}
-
-	public void setStartPrice(BigDecimal startPrice) {
-		this.startPrice = startPrice;
-	}
-
-	public Date getStartTime() {
-		return this.startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public byte getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(byte status) {
-		this.status = status;
-	}
-
-	public Categoryauction getCategoryauction() {
-		return this.categoryauction;
-	}
-
-	public void setCategoryauction(Categoryauction categoryauction) {
-		this.categoryauction = categoryauction;
-	}
-
-	public Customer getCustomer() {
-		return this.customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 	public Employee getEmployee() {
 		return this.employee;
@@ -149,6 +62,90 @@ public class Auction implements Serializable {
 		this.employee = employee;
 	}
 
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getEndTime() {
+		return this.endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+
+	@Lob
+	public String getImageURL() {
+		return this.imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+
+
+	public String getProductName() {
+		return this.productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+
+	public BigDecimal getStartPrice() {
+		return this.startPrice;
+	}
+
+	public void setStartPrice(BigDecimal startPrice) {
+		this.startPrice = startPrice;
+	}
+
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+
+	public byte getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(byte status) {
+		this.status = status;
+	}
+
+
+	//bi-directional many-to-one association to Categoryauction
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CategoryAuctionID")
+	public Categoryauction getCategoryauction() {
+		return this.categoryauction;
+	}
+
+	public void setCategoryauction(Categoryauction categoryauction) {
+		this.categoryauction = categoryauction;
+	}
+
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CustomerID")
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
+	//bi-directional many-to-one association to Auctionstatus
+	@OneToMany(mappedBy="auction")
 	public List<Auctionstatus> getAuctionstatuses() {
 		return this.auctionstatuses;
 	}

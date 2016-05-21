@@ -11,33 +11,21 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="auctionstatus")
 @NamedQuery(name="Auctionstatus.findAll", query="SELECT a FROM Auctionstatus a")
 public class Auctionstatus implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int asid;
-
 	private BigDecimal bidPrice;
-
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date bidTime;
-
-	//bi-directional many-to-one association to Auction
-	@ManyToOne
-	@JoinColumn(name="AuctionID")
 	private Auction auction;
-
-	//bi-directional many-to-one association to Customer
-	@ManyToOne
-	@JoinColumn(name="CustomerID")
 	private Customer customer;
 
 	public Auctionstatus() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getAsid() {
 		return this.asid;
 	}
@@ -45,6 +33,7 @@ public class Auctionstatus implements Serializable {
 	public void setAsid(int asid) {
 		this.asid = asid;
 	}
+
 
 	public BigDecimal getBidPrice() {
 		return this.bidPrice;
@@ -54,6 +43,8 @@ public class Auctionstatus implements Serializable {
 		this.bidPrice = bidPrice;
 	}
 
+
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getBidTime() {
 		return this.bidTime;
 	}
@@ -62,6 +53,10 @@ public class Auctionstatus implements Serializable {
 		this.bidTime = bidTime;
 	}
 
+
+	//bi-directional many-to-one association to Auction
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="AuctionID")
 	public Auction getAuction() {
 		return this.auction;
 	}
@@ -70,6 +65,10 @@ public class Auctionstatus implements Serializable {
 		this.auction = auction;
 	}
 
+
+	//bi-directional many-to-one association to Customer
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CustomerID")
 	public Customer getCustomer() {
 		return this.customer;
 	}

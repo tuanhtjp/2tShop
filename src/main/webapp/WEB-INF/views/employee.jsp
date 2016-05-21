@@ -59,8 +59,8 @@
 					<td>
 						<c:choose> 
 							<%-- <c:out value="${cus.getSex() }"></c:out> --%>
-							<c:when test="${emp.getSex() == '1' }"><p>Male</p></c:when>
-							<c:when test="${emp.getSex() == '0' }"><p>Female</p></c:when>
+							<c:when test="${emp.getSex() == 1 }"><p>Male</p></c:when>
+							<c:when test="${emp.getSex() == 0 }"><p>Female</p></c:when>
 						</c:choose>	
 					</td>
 					<td><c:out value="${emp.getEmail()}"></c:out></td>
@@ -69,15 +69,24 @@
 					<td><c:out value="${emp.getAddress()}"></c:out></td>
 					<td><c:out value="${emp.getImage()}"></c:out></td>
 					<td>
-					<c:out value="${emp.getRole().getRoleName()}"></c:out>
+					<c:out value="${emp.role.roleName}"></c:out>
 					</td>
-					<td>
+					<%-- <td>
 						<c:choose> 
-							<%-- <c:out value="${cus.getSex() }"></c:out> --%>
+							<c:out value="${cus.getSex() }"></c:out>
 							<c:when test="${emp.getStatus() == 1 }"><p style="color: red; font-weight: bold;">Off</p></c:when>
 							<c:when test="${emp.getStatus() == 0 }"><p style="color: green; font-weight: bold;">On</p></c:when>
 						</c:choose>	
-					</td>
+					</td> --%>
+					<td><c:choose>
+
+							<c:when test="${emp.status == 0 }">
+								<p style="color: red; font-weight: bold;">Off</p>
+							</c:when>
+							<c:when test="${emp.status == 1 }">
+								<p style="color: green; font-weight: bold;">On</p>
+							</c:when>
+						</c:choose></td>
 					<td>
 						<form action="emp-edit/${emp.getEmployeeID()}" method="GET">
 							<input id="emp" name="emp" type="hidden"

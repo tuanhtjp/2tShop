@@ -15,34 +15,21 @@ import java.util.List;
 @NamedQuery(name="Promotion.findAll", query="SELECT p FROM Promotion p")
 public class Promotion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int promotionID;
-
-	@Lob
 	private String description;
-
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
-
-	@Lob
 	private String imageUrl;
-
 	private String promotionCode;
-
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
-
 	private int value;
-
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="promotion", fetch=FetchType.EAGER)
 	private List<Order> orders;
 
 	public Promotion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getPromotionID() {
 		return this.promotionID;
 	}
@@ -51,6 +38,8 @@ public class Promotion implements Serializable {
 		this.promotionID = promotionID;
 	}
 
+
+	@Lob
 	public String getDescription() {
 		return this.description;
 	}
@@ -59,6 +48,8 @@ public class Promotion implements Serializable {
 		this.description = description;
 	}
 
+
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getEndDate() {
 		return this.endDate;
 	}
@@ -67,6 +58,8 @@ public class Promotion implements Serializable {
 		this.endDate = endDate;
 	}
 
+
+	@Lob
 	public String getImageUrl() {
 		return this.imageUrl;
 	}
@@ -74,6 +67,7 @@ public class Promotion implements Serializable {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+
 
 	public String getPromotionCode() {
 		return this.promotionCode;
@@ -83,6 +77,8 @@ public class Promotion implements Serializable {
 		this.promotionCode = promotionCode;
 	}
 
+
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getStartDate() {
 		return this.startDate;
 	}
@@ -90,6 +86,7 @@ public class Promotion implements Serializable {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+
 
 	public int getValue() {
 		return this.value;
@@ -99,6 +96,9 @@ public class Promotion implements Serializable {
 		this.value = value;
 	}
 
+
+	//bi-directional many-to-one association to Order
+	@OneToMany(mappedBy="promotion")
 	public List<Order> getOrders() {
 		return this.orders;
 	}

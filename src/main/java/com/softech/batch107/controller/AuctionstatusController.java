@@ -25,7 +25,7 @@ public class AuctionstatusController {
 	public ModelAndView showAll(){
 		try {
 			listAucstatus = auctionsatusDAO.findAll();
-			mv.addObject("listAucstatú", listAucstatus);
+			mv.addObject("listAucstatus", listAucstatus);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

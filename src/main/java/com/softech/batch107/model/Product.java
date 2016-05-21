@@ -16,58 +16,30 @@ import java.util.List;
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int productID;
-
 	private String barcode;
-
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-
-	@Lob
 	private String description;
-
 	private int discount;
-
-	@Lob
+	private String displayPosition;
 	private String imageUrl;
-
 	private BigDecimal price;
-
 	private String productName;
-
 	private int quantity;
-
+	private int sortOrder;
 	private byte status;
-
-	//bi-directional many-to-one association to Orderdetail
-	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
 	private List<Orderdetail> orderdetails;
-
-	//bi-directional many-to-one association to Brand
-	@ManyToOne
-	@JoinColumn(name="BrandID")
 	private Brand brand;
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="CategoryID")
 	private Category category;
-
-	//bi-directional many-to-one association to Size
-	@ManyToOne
-	@JoinColumn(name="SizeID")
 	private Size size;
-
-	//bi-directional many-to-one association to Starbuck
-	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
 	private List<Starbuck> starbucks;
 
 	public Product() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getProductID() {
 		return this.productID;
 	}
@@ -75,6 +47,7 @@ public class Product implements Serializable {
 	public void setProductID(int productID) {
 		this.productID = productID;
 	}
+
 
 	public String getBarcode() {
 		return this.barcode;
@@ -84,6 +57,8 @@ public class Product implements Serializable {
 		this.barcode = barcode;
 	}
 
+
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreatedDate() {
 		return this.createdDate;
 	}
@@ -92,6 +67,8 @@ public class Product implements Serializable {
 		this.createdDate = createdDate;
 	}
 
+
+	@Lob
 	public String getDescription() {
 		return this.description;
 	}
@@ -99,6 +76,7 @@ public class Product implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 	public int getDiscount() {
 		return this.discount;
@@ -108,6 +86,17 @@ public class Product implements Serializable {
 		this.discount = discount;
 	}
 
+
+	public String getDisplayPosition() {
+		return this.displayPosition;
+	}
+
+	public void setDisplayPosition(String displayPosition) {
+		this.displayPosition = displayPosition;
+	}
+
+
+	@Lob
 	public String getImageUrl() {
 		return this.imageUrl;
 	}
@@ -115,6 +104,7 @@ public class Product implements Serializable {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
+
 
 	public BigDecimal getPrice() {
 		return this.price;
@@ -124,6 +114,7 @@ public class Product implements Serializable {
 		this.price = price;
 	}
 
+
 	public String getProductName() {
 		return this.productName;
 	}
@@ -131,6 +122,7 @@ public class Product implements Serializable {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 
 	public int getQuantity() {
 		return this.quantity;
@@ -140,6 +132,16 @@ public class Product implements Serializable {
 		this.quantity = quantity;
 	}
 
+
+	public int getSortOrder() {
+		return this.sortOrder;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
+	}
+
+
 	public byte getStatus() {
 		return this.status;
 	}
@@ -148,6 +150,9 @@ public class Product implements Serializable {
 		this.status = status;
 	}
 
+
+	//bi-directional many-to-one association to Orderdetail
+	@OneToMany(mappedBy="product")
 	public List<Orderdetail> getOrderdetails() {
 		return this.orderdetails;
 	}
@@ -170,6 +175,10 @@ public class Product implements Serializable {
 		return orderdetail;
 	}
 
+
+	//bi-directional many-to-one association to Brand
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="BrandID")
 	public Brand getBrand() {
 		return this.brand;
 	}
@@ -178,6 +187,10 @@ public class Product implements Serializable {
 		this.brand = brand;
 	}
 
+
+	//bi-directional many-to-one association to Category
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CategoryID")
 	public Category getCategory() {
 		return this.category;
 	}
@@ -186,6 +199,10 @@ public class Product implements Serializable {
 		this.category = category;
 	}
 
+
+	//bi-directional many-to-one association to Size
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SizeID")
 	public Size getSize() {
 		return this.size;
 	}
@@ -194,6 +211,9 @@ public class Product implements Serializable {
 		this.size = size;
 	}
 
+
+	//bi-directional many-to-one association to Starbuck
+	@OneToMany(mappedBy="product")
 	public List<Starbuck> getStarbucks() {
 		return this.starbucks;
 	}

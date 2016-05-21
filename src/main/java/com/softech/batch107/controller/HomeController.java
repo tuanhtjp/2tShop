@@ -30,9 +30,7 @@ public class HomeController {
 	HomeConoller2 homeController = new HomeController2();
 	Khi autowired, nếu cái homeController này đang trỏ đến 1 thằng rồi, thì nó sẽ tự động trỏ đến thằng kia luôn
 	ko cần tạo mới nữa. còn nếu chưa, thì nó tự tạo mới(homeController = new HomeController2()) cho mình luôn.*/
-	
-	@Autowired
-	HomeController2 homeController;
+
 
 	/*Nhớ đặt biến cho đúng pattern nghe*/
 	/*Ở đây, khai báo thể hiện ra thôi, nó đã biết đây là 1 bean rồi, autowired ~ tự trỏ, nếu chưa có, tự tạo, khỏi new*/
@@ -50,7 +48,7 @@ public class HomeController {
 
 		/*Bởi rứa cái hàm này tưởng nó ko có = new HomeController2() nhưng mà thực ra nó tự trỏ, tự new luôn rồi
 		Đó gọi là injection. Bởi rứa trong spring, hạn chế new đối tượng, bởi thằng container nó quản lý rồi.*/
-		homeController.hello();
+		/*homeController.hello();*/
 		
 		/*model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("list", list);*/

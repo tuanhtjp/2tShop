@@ -14,34 +14,19 @@ import java.math.BigDecimal;
 @NamedQuery(name="Orderdetail.findAll", query="SELECT o FROM Orderdetail o")
 public class Orderdetail implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private OrderdetailPK id;
-
 	private float discount;
-
 	private short quantity;
-
 	private BigDecimal unitPrice;
-
-	//bi-directional many-to-one association to Order
-	@ManyToOne
-	@JoinColumn(name="OrderID")
 	private Order order;
-
-	//bi-directional many-to-one association to Product
-	@ManyToOne
-	@JoinColumn(name="ProductID")
 	private Product product;
-
-	//bi-directional many-to-one association to Size
-	@ManyToOne
-	@JoinColumn(name="SizeID")
 	private Size size;
 
 	public Orderdetail() {
 	}
 
+
+	@EmbeddedId
 	public OrderdetailPK getId() {
 		return this.id;
 	}
@@ -49,6 +34,7 @@ public class Orderdetail implements Serializable {
 	public void setId(OrderdetailPK id) {
 		this.id = id;
 	}
+
 
 	public float getDiscount() {
 		return this.discount;
@@ -58,6 +44,7 @@ public class Orderdetail implements Serializable {
 		this.discount = discount;
 	}
 
+
 	public short getQuantity() {
 		return this.quantity;
 	}
@@ -65,6 +52,7 @@ public class Orderdetail implements Serializable {
 	public void setQuantity(short quantity) {
 		this.quantity = quantity;
 	}
+
 
 	public BigDecimal getUnitPrice() {
 		return this.unitPrice;
@@ -74,6 +62,10 @@ public class Orderdetail implements Serializable {
 		this.unitPrice = unitPrice;
 	}
 
+
+	//bi-directional many-to-one association to Order
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="OrderID",insertable=false, updatable=false)
 	public Order getOrder() {
 		return this.order;
 	}
@@ -82,6 +74,10 @@ public class Orderdetail implements Serializable {
 		this.order = order;
 	}
 
+
+	//bi-directional many-to-one association to Product
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ProductID", insertable=false, updatable=false)
 	public Product getProduct() {
 		return this.product;
 	}
@@ -90,6 +86,10 @@ public class Orderdetail implements Serializable {
 		this.product = product;
 	}
 
+
+	//bi-directional many-to-one association to Size
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="SizeID")
 	public Size getSize() {
 		return this.size;
 	}

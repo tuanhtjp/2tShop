@@ -2,6 +2,7 @@ package com.softech.batch107.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,51 +15,25 @@ import java.util.List;
 @NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int employeeID;
-
-	@Lob
 	private String address;
-
-	@Lob
-	private String dob;
-
-	@Lob
+	private Date dob;
 	private String email;
-
-	@Lob
 	private String fullName;
-
-	@Lob
 	private String image;
-
-	@Lob
 	private String password;
-
 	private String phone;
-
-	private String sex;
-
+	private byte sex;
 	private byte status;
-
-	//bi-directional many-to-one association to Auction
-	@OneToMany(mappedBy="employee", fetch=FetchType.EAGER)
-	private List<Auction> auctions;
-
-	//bi-directional many-to-one association to Role
-	@ManyToOne
-	@JoinColumn(name="RoleID")
 	private Role role;
-
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="employee", fetch=FetchType.EAGER)
 	private List<Order> orders;
 
 	public Employee() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getEmployeeID() {
 		return this.employeeID;
 	}
@@ -67,6 +42,8 @@ public class Employee implements Serializable {
 		this.employeeID = employeeID;
 	}
 
+
+	@Lob
 	public String getAddress() {
 		return this.address;
 	}
@@ -75,14 +52,18 @@ public class Employee implements Serializable {
 		this.address = address;
 	}
 
-	public String getDob() {
+
+	@Temporal(TemporalType.DATE)
+	public Date getDob() {
 		return this.dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
+
+	@Lob
 	public String getEmail() {
 		return this.email;
 	}
@@ -91,6 +72,8 @@ public class Employee implements Serializable {
 		this.email = email;
 	}
 
+
+	@Lob
 	public String getFullName() {
 		return this.fullName;
 	}
@@ -99,6 +82,8 @@ public class Employee implements Serializable {
 		this.fullName = fullName;
 	}
 
+
+	@Lob
 	public String getImage() {
 		return this.image;
 	}
@@ -107,6 +92,8 @@ public class Employee implements Serializable {
 		this.image = image;
 	}
 
+
+	@Lob
 	public String getPassword() {
 		return this.password;
 	}
@@ -114,6 +101,7 @@ public class Employee implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 	public String getPhone() {
 		return this.phone;
@@ -123,14 +111,14 @@ public class Employee implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getSex() {
+
+	public byte getSex() {
 		return this.sex;
 	}
 
-	public void setSex(String sex) {
+	public void setSex(byte sex) {
 		this.sex = sex;
 	}
-	
 
 
 	public byte getStatus() {
@@ -141,28 +129,10 @@ public class Employee implements Serializable {
 		this.status = status;
 	}
 
-	public List<Auction> getAuctions() {
-		return this.auctions;
-	}
 
-	public void setAuctions(List<Auction> auctions) {
-		this.auctions = auctions;
-	}
-
-	public Auction addAuction(Auction auction) {
-		getAuctions().add(auction);
-		auction.setEmployee(this);
-
-		return auction;
-	}
-
-	public Auction removeAuction(Auction auction) {
-		getAuctions().remove(auction);
-		auction.setEmployee(null);
-
-		return auction;
-	}
-
+	//bi-directional many-to-one association to Role
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="RoleID")
 	public Role getRole() {
 		return this.role;
 	}
@@ -171,6 +141,9 @@ public class Employee implements Serializable {
 		this.role = role;
 	}
 
+
+	//bi-directional many-to-one association to Order
+	@OneToMany(mappedBy="employee")
 	public List<Order> getOrders() {
 		return this.orders;
 	}

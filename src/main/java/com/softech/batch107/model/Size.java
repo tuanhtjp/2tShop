@@ -14,24 +14,17 @@ import java.util.List;
 @NamedQuery(name="Size.findAll", query="SELECT s FROM Size s")
 public class Size implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int sizeID;
-
 	private String sizeName;
-
-	//bi-directional many-to-one association to Orderdetail
-	@OneToMany(mappedBy="size", fetch=FetchType.EAGER)
 	private List<Orderdetail> orderdetails;
-
-	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="size", fetch=FetchType.EAGER)
 	private List<Product> products;
 
 	public Size() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getSizeID() {
 		return this.sizeID;
 	}
@@ -39,6 +32,7 @@ public class Size implements Serializable {
 	public void setSizeID(int sizeID) {
 		this.sizeID = sizeID;
 	}
+
 
 	public String getSizeName() {
 		return this.sizeName;
@@ -48,6 +42,9 @@ public class Size implements Serializable {
 		this.sizeName = sizeName;
 	}
 
+
+	//bi-directional many-to-one association to Orderdetail
+	@OneToMany(mappedBy="size")
 	public List<Orderdetail> getOrderdetails() {
 		return this.orderdetails;
 	}
@@ -70,6 +67,9 @@ public class Size implements Serializable {
 		return orderdetail;
 	}
 
+
+	//bi-directional many-to-one association to Product
+	@OneToMany(mappedBy="size")
 	public List<Product> getProducts() {
 		return this.products;
 	}
